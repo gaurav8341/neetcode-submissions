@@ -245,6 +245,30 @@
         "url": "https://leetcode.com/problems/validate-binary-search-tree/",
         "solved": true,
         "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Binary Tree Level Order Traversal",
+        "url": "https://leetcode.com/problems/binary-tree-level-order-traversal/",
+        "difficulty": "Medium",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Kth Smallest Element in a BST",
+        "url": "https://leetcode.com/problems/kth-smallest-element-in-a-bst/",
+        "difficulty": "Medium",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Maximum Balanced Shipments",
+        "url": "https://leetcode.com/problems/maximum-balanced-shipments/",
+        "difficulty": "Medium",
+        "solved": true,
+        "last_reviewed": null
       }
     ],
     "heaps": [
@@ -310,6 +334,22 @@
         "url": "https://leetcode.com/problems/design-twitter/",
         "solved": true,
         "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Kth Largest Element in a Stream",
+        "url": "https://leetcode.com/problems/kth-largest-element-in-a-stream/",
+        "difficulty": "Easy",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Maximum Average Pass Ratio",
+        "url": "https://leetcode.com/problems/maximum-average-pass-ratio/",
+        "difficulty": "Medium",
+        "solved": true,
+        "last_reviewed": null
       }
     ],
     "sliding-window": [
@@ -353,6 +393,46 @@
         "title": "Find All Anagrams in String",
         "url": "https://leetcode.com/problems/find-all-anagrams-in-a-string/",
         "solved": false,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Fruits Into Baskets II",
+        "url": "https://leetcode.com/problems/fruits-into-baskets-ii/",
+        "difficulty": "Easy",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Longest Subarray of 1's After Deleting One Element",
+        "url": "https://leetcode.com/problems/longest-subarray-of-1s-after-deleting-one-element/",
+        "difficulty": "Medium",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Maximum Erasure Value",
+        "url": "https://leetcode.com/problems/maximum-erasure-value/",
+        "difficulty": "Medium",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Maximum Fruits Harvested After at Most K Steps",
+        "url": "https://leetcode.com/problems/maximum-fruits-harvested-after-at-most-k-steps/",
+        "difficulty": "Hard",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Rearranging Fruits",
+        "url": "https://leetcode.com/problems/rearranging-fruits/",
+        "difficulty": "Hard",
+        "solved": true,
         "last_reviewed": null
       }
     ],
@@ -470,6 +550,14 @@
         "url": "https://leetcode.com/problems/subsets/",
         "solved": true,
         "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Count Number of Maximum Bitwise-OR Subsets",
+        "url": "https://leetcode.com/problems/count-number-of-maximum-bitwise-or-subsets/",
+        "difficulty": "Medium",
+        "solved": true,
+        "last_reviewed": null
       }
     ],
     "dp-1d": [
@@ -565,6 +653,22 @@
         "url": "https://leetcode.com/problems/regular-expression-matching/",
         "solved": false,
         "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Pascal's Triangle",
+        "url": "https://leetcode.com/problems/pascals-triangle/",
+        "difficulty": "Easy",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Ways to Express an Integer as Sum of Powers",
+        "url": "https://leetcode.com/problems/ways-to-express-an-integer-as-sum-of-powers/",
+        "difficulty": "Medium",
+        "solved": true,
+        "last_reviewed": null
       }
     ],
     "tries": [
@@ -640,7 +744,8 @@
         "solved": false,
         "last_reviewed": null
       }
-    ]
+    ],
+    "uncategorized": []
   },
   "easy": {
     "arrays": [
@@ -719,6 +824,14 @@
         "title": "Gas Station",
         "url": "https://leetcode.com/problems/gas-station/",
         "solved": false,
+        "last_reviewed": null
+      },
+      {
+        "id": 1909,
+        "title": "Remove One Element to Make the Array Strictly Increasing",
+        "url": "https://leetcode.com/problems/remove-one-element-to-make-the-array-strictly-increasing/",
+        "difficulty": "Easy",
+        "solved": true,
         "last_reviewed": null
       }
     ],
@@ -917,6 +1030,22 @@
         "url": "https://leetcode.com/problems/reverse-nodes-in-k-group/",
         "solved": true,
         "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Convert Binary Number in a Linked List to Integer",
+        "url": "https://leetcode.com/problems/convert-binary-number-in-a-linked-list-to-integer/",
+        "difficulty": "Easy",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Copy List with Random Pointer",
+        "url": "https://leetcode.com/problems/copy-list-with-random-pointer/",
+        "difficulty": "Medium",
+        "solved": true,
+        "last_reviewed": null
       }
     ],
     "sorting": [
@@ -954,6 +1083,14 @@
         "url": "https://leetcode.com/problems/wiggle-sort/",
         "solved": false,
         "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Sort Matrix by Diagonals",
+        "url": "https://leetcode.com/problems/sort-matrix-by-diagonals/",
+        "difficulty": "Medium",
+        "solved": true,
+        "last_reviewed": null
       }
     ],
     "greedy": [
@@ -990,6 +1127,22 @@
         "title": "Valid Parenthesis String",
         "url": "https://leetcode.com/problems/valid-parenthesis-string/",
         "solved": false,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Assign Cookies",
+        "url": "https://leetcode.com/problems/assign-cookies/",
+        "difficulty": "Easy",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Maximum Matching of Players With Trainers",
+        "url": "https://leetcode.com/problems/maximum-matching-of-players-with-trainers/",
+        "difficulty": "Medium",
+        "solved": true,
         "last_reviewed": null
       }
     ],
@@ -1041,6 +1194,320 @@
         "title": "Pow(x, n)",
         "url": "https://leetcode.com/problems/powx-n/",
         "solved": false,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Power of Four",
+        "url": "https://leetcode.com/problems/power-of-four/",
+        "difficulty": "Easy",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Power of Three",
+        "url": "https://leetcode.com/problems/power-of-three/",
+        "difficulty": "Easy",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Power of Two",
+        "url": "https://leetcode.com/problems/power-of-two/",
+        "difficulty": "Easy",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Range Product Queries of Powers",
+        "url": "https://leetcode.com/problems/range-product-queries-of-powers/",
+        "difficulty": "Medium",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Reordered Power of 2",
+        "url": "https://leetcode.com/problems/reordered-power-of-2/",
+        "difficulty": "Medium",
+        "solved": true,
+        "last_reviewed": null
+      }
+    ],
+    "uncategorized": [
+      {
+        "id": 3093,
+        "title": "Longest Common Suffix Queries",
+        "url": "https://leetcode.com/problems/longest-common-suffix-queries/",
+        "difficulty": "Hard",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Alice and Bob Playing Flower Game",
+        "url": "https://leetcode.com/problems/alice-and-bob-playing-flower-game/",
+        "difficulty": "Medium",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Bitwise ORs of Subarrays",
+        "url": "https://leetcode.com/problems/bitwise-ors-of-subarrays/",
+        "difficulty": "Medium",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Count Hills and Valleys in an Array",
+        "url": "https://leetcode.com/problems/count-hills-and-valleys-in-an-array/",
+        "difficulty": "Easy",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Count Submatrices With All Ones",
+        "url": "https://leetcode.com/problems/count-submatrices-with-all-ones/",
+        "difficulty": "Medium",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Delete Characters to Make Fancy String",
+        "url": "https://leetcode.com/problems/delete-characters-to-make-fancy-string/",
+        "difficulty": "Easy",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Diagonal Traverse",
+        "url": "https://leetcode.com/problems/diagonal-traverse/",
+        "difficulty": "Medium",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Find Closest Person",
+        "url": "https://leetcode.com/problems/find-closest-person/",
+        "difficulty": "Easy",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Find Lucky Integer in an Array",
+        "url": "https://leetcode.com/problems/find-lucky-integer-in-an-array/",
+        "difficulty": "Easy",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Find the Duplicate Number",
+        "url": "https://leetcode.com/problems/find-the-duplicate-number/",
+        "difficulty": "Medium",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Find the K-th Character in String Game I",
+        "url": "https://leetcode.com/problems/find-the-k-th-character-in-string-game-i/",
+        "difficulty": "Easy",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Find the Maximum Length of Valid Subsequence I",
+        "url": "https://leetcode.com/problems/find-the-maximum-length-of-valid-subsequence-i/",
+        "difficulty": "Medium",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Find the Maximum Number of Fruits Collected",
+        "url": "https://leetcode.com/problems/find-the-maximum-number-of-fruits-collected/",
+        "difficulty": "Hard",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Find the Minimum Area to Cover All Ones I",
+        "url": "https://leetcode.com/problems/find-the-minimum-area-to-cover-all-ones-i/",
+        "difficulty": "Medium",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Find the Number of Ways to Place People I",
+        "url": "https://leetcode.com/problems/find-the-number-of-ways-to-place-people-i/",
+        "difficulty": "Medium",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Find the Original Typed String I",
+        "url": "https://leetcode.com/problems/find-the-original-typed-string-i/",
+        "difficulty": "Easy",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Fruit Into Baskets",
+        "url": "https://leetcode.com/problems/fruit-into-baskets/",
+        "difficulty": "Medium",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Largest 3-Same-Digit Number in String",
+        "url": "https://leetcode.com/problems/largest-3-same-digit-number-in-string/",
+        "difficulty": "Easy",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Length of Longest V-Shaped Diagonal Segment",
+        "url": "https://leetcode.com/problems/length-of-longest-v-shaped-diagonal-segment/",
+        "difficulty": "Hard",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Longest Subarray With Maximum Bitwise AND",
+        "url": "https://leetcode.com/problems/longest-subarray-with-maximum-bitwise-and/",
+        "difficulty": "Medium",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Maximize Subarrays After Removing One Conflicting Pair",
+        "url": "https://leetcode.com/problems/maximize-subarrays-after-removing-one-conflicting-pair/",
+        "difficulty": "Hard",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Maximum 69 Number",
+        "url": "https://leetcode.com/problems/maximum-69-number/",
+        "difficulty": "Easy",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Maximum Area of Longest Diagonal Rectangle",
+        "url": "https://leetcode.com/problems/maximum-area-of-longest-diagonal-rectangle/",
+        "difficulty": "Easy",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Maximum Number of Events That Can Be Attended",
+        "url": "https://leetcode.com/problems/maximum-number-of-events-that-can-be-attended/",
+        "difficulty": "Medium",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Maximum Unique Subarray Sum After Deletion",
+        "url": "https://leetcode.com/problems/maximum-unique-subarray-sum-after-deletion/",
+        "difficulty": "Easy",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Minimum Difference in Sums After Removal of Elements",
+        "url": "https://leetcode.com/problems/minimum-difference-in-sums-after-removal-of-elements/",
+        "difficulty": "Hard",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Plus One",
+        "url": "https://leetcode.com/problems/plus-one/",
+        "difficulty": "Easy",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Rank Scores",
+        "url": "https://leetcode.com/problems/rank-scores/",
+        "difficulty": "Medium",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Remove Sub-Folders from the Filesystem",
+        "url": "https://leetcode.com/problems/remove-sub-folders-from-the-filesystem/",
+        "difficulty": "Medium",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Separate Squares I",
+        "url": "https://leetcode.com/problems/separate-squares-i/",
+        "difficulty": "Medium",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Smallest Subarrays With Maximum Bitwise OR",
+        "url": "https://leetcode.com/problems/smallest-subarrays-with-maximum-bitwise-or/",
+        "difficulty": "Medium",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Soup Servings",
+        "url": "https://leetcode.com/problems/soup-servings/",
+        "difficulty": "Medium",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Trionic Array I",
+        "url": "https://leetcode.com/problems/trionic-array-i/",
+        "difficulty": "Easy",
+        "solved": true,
+        "last_reviewed": null
+      },
+      {
+        "id": 0,
+        "title": "Valid Word",
+        "url": "https://leetcode.com/problems/valid-word/",
+        "difficulty": "Easy",
+        "solved": true,
         "last_reviewed": null
       }
     ]
