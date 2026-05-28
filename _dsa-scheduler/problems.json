@@ -884,6 +884,14 @@
         "url": "https://leetcode.com/problems/lru-cache/",
         "solved": true,
         "last_reviewed": null
+      },
+      {
+        "id": 3120,
+        "title": "Count the Number of Special Characters I",
+        "url": "https://leetcode.com/problems/count-the-number-of-special-characters-i/",
+        "difficulty": "Easy",
+        "solved": true,
+        "last_reviewed": null
       }
     ],
     "strings": [
