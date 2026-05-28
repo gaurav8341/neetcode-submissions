@@ -230,8 +230,13 @@ Data Structures & Algorithms/
 |  |
 | ------- |
 | [3093-longest-common-suffix-queries](https://github.com/gaurav8341/neetcode-submissions/tree/master/3093-longest-common-suffix-queries) |
+| [3121-count-the-number-of-special-characters-ii](https://github.com/gaurav8341/neetcode-submissions/tree/master/3121-count-the-number-of-special-characters-ii) |
 ## Trie
 |  |
 | ------- |
 | [3093-longest-common-suffix-queries](https://github.com/gaurav8341/neetcode-submissions/tree/master/3093-longest-common-suffix-queries) |
+## Hash Table
+|  |
+| ------- |
+| [3121-count-the-number-of-special-characters-ii](https://github.com/gaurav8341/neetcode-submissions/tree/master/3121-count-the-number-of-special-characters-ii) |
 <!---LeetCode Topics End-->
