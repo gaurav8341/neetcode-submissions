@@ -225,4 +225,13 @@ Data Structures & Algorithms/
 |  |
 | ------- |
 | [1909-remove-one-element-to-make-the-array-strictly-increasing](https://github.com/gaurav8341/neetcode-submissions/tree/master/1909-remove-one-element-to-make-the-array-strictly-increasing) |
+| [3093-longest-common-suffix-queries](https://github.com/gaurav8341/neetcode-submissions/tree/master/3093-longest-common-suffix-queries) |
+## String
+|  |
+| ------- |
+| [3093-longest-common-suffix-queries](https://github.com/gaurav8341/neetcode-submissions/tree/master/3093-longest-common-suffix-queries) |
+## Trie
+|  |
+| ------- |
+| [3093-longest-common-suffix-queries](https://github.com/gaurav8341/neetcode-submissions/tree/master/3093-longest-common-suffix-queries) |
 <!---LeetCode Topics End-->
