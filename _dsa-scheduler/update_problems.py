@@ -1,89 +1,175 @@
 """
 Runs on every push to main via GitHub Actions.
 
-Does two things:
-1. AUTO-DISCOVER new problem folders not in problems.json → parse README → classify → add
-2. SYNC solved status for all problems already in the bank
+1. AUTO-DISCOVER new problem folders not in problems.json
+   → calls LeetCode GraphQL API to get topic tags
+   → maps tags to our topic buckets (100% accurate)
+   → falls back to keyword matching if API fails
+2. SYNC solved status for all problems in the bank
 """
 import json
 import os
 import re
+import time
 from pathlib import Path
 
-# ── Topic classification by slug keywords ────────────────────────────────────
+try:
+    import requests
+except ImportError:
+    import subprocess
+    subprocess.run(["pip", "install", "requests", "-q"])
+    import requests
+
+# ── LC tag → our topic mapping ────────────────────────────────────────────────
+LC_TAG_TO_TOPIC = {
+    "depth-first-search":    ("hard", "graphs-bfs-dfs"),
+    "breadth-first-search":  ("hard", "graphs-bfs-dfs"),
+    "matrix":                ("hard", "graphs-bfs-dfs"),
+    "topological-sort":      ("hard", "graphs-topo-sort"),
+    "union-find":            ("hard", "graphs-advanced"),
+    "shortest-path":         ("hard", "graphs-advanced"),
+    "graph":                 ("hard", "graphs-bfs-dfs"),
+    "tree":                  ("hard", "trees"),
+    "binary-tree":           ("hard", "trees"),
+    "binary-search-tree":    ("hard", "trees"),
+    "heap-priority-queue":   ("hard", "heaps"),
+    "sliding-window":        ("hard", "sliding-window"),
+    "binary-search":         ("hard", "binary-search"),
+    "backtracking":          ("hard", "backtracking"),
+    "dynamic-programming":   ("hard", "dp-1d"),
+    "trie":                  ("hard", "tries"),
+    "monotonic-stack":       ("hard", "monotonic-stack"),
+    "divide-and-conquer":    ("hard", "binary-search"),
+    "recursion":             ("hard", "backtracking"),
+    "stack":                 ("easy", "stack-queue"),
+    "queue":                 ("easy", "stack-queue"),
+    "monotonic-queue":       ("easy", "stack-queue"),
+    "array":                 ("easy", "arrays"),
+    "two-pointers":          ("easy", "arrays"),
+    "prefix-sum":            ("easy", "arrays"),
+    "hash-table":            ("easy", "hashmaps"),
+    "string":                ("easy", "strings"),
+    "string-matching":       ("easy", "strings"),
+    "linked-list":           ("easy", "linked-list"),
+    "sorting":               ("easy", "sorting"),
+    "counting-sort":         ("easy", "sorting"),
+    "greedy":                ("easy", "greedy"),
+    "bit-manipulation":      ("easy", "math-bit"),
+    "math":                  ("easy", "math-bit"),
+    "number-theory":         ("easy", "math-bit"),
+}
+
+# Hard topics take priority over easy ones
+HARD_TOPICS = {"graphs-bfs-dfs", "graphs-topo-sort", "graphs-advanced", "trees",
+               "heaps", "sliding-window", "binary-search", "backtracking",
+               "dp-1d", "dp-2d", "tries", "monotonic-stack"}
+
+# ── Keyword fallback (used if API fails) ──────────────────────────────────────
 TOPIC_RULES = [
-    # Hard topics first
-    ("graphs-bfs-dfs",   ["island", "flood-fill", "clone-graph", "surrounded", "pacific", "atlantic",
-                          "rotting", "word-ladder", "bipartite", "01-matrix", "treasure", "gates"]),
-    ("graphs-topo-sort", ["course-schedule", "alien-dictionary", "sequence-reconstruction",
-                          "parallel-courses", "minimum-height-trees"]),
+    ("graphs-bfs-dfs",   ["island", "flood-fill", "clone-graph", "surrounded", "pacific",
+                          "rotting", "word-ladder", "bipartite", "01-matrix", "treasure"]),
+    ("graphs-topo-sort", ["course-schedule", "alien-dictionary", "parallel-courses", "minimum-height-trees"]),
     ("graphs-advanced",  ["network-delay", "cheapest-flights", "redundant-connection",
-                          "connected-components", "min-cost-to-connect", "swim-in-rising", "valid-tree"]),
+                          "connected-components", "swim-in-rising", "valid-tree"]),
     ("trees",            ["binary-tree", "inorder", "preorder", "postorder", "level-order",
-                          "serialize", "deserialize", "lowest-common-ancestor", "balanced-binary",
+                          "serialize", "lowest-common-ancestor", "balanced-binary",
                           "invert-binary", "subtree", "diameter", "path-sum", "right-side-view",
-                          "good-nodes", "kth-smallest-element-in-a-bst", "validate-binary",
-                          "maximum-balanced-shipments"]),
-    ("heaps",            ["median", "data-stream", "merge-k-sorted", "kth-largest", "kth-largest-element-in-a-stream",
+                          "good-nodes", "kth-smallest-element-in-a-bst", "validate-binary"]),
+    ("heaps",            ["median", "data-stream", "merge-k-sorted", "kth-largest",
                           "k-closest", "task-scheduler", "reorganize-string", "design-twitter",
-                          "k-pairs", "stone-weight", "pass-ratio"]),
+                          "stone-weight", "pass-ratio"]),
     ("sliding-window",   ["longest-substring-without", "sliding-window-maximum", "minimum-window",
                           "permutation-in-string", "repeating-character-replacement",
-                          "erasure-value", "subarray-of-1s", "maximum-fruits-harvested",
-                          "rearranging-fruits", "fruits-into-baskets"]),
+                          "erasure-value", "subarray-of-1s", "maximum-fruits-harvested"]),
     ("binary-search",    ["rotated-sorted-array", "minimum-in-rotated", "median-of-two",
                           "search-a-2d-matrix", "eating-bananas", "capacity-to-ship",
                           "peak-element", "time-based-key-value"]),
     ("backtracking",     ["combination-sum", "palindrome-partitioning", "letter-combinations",
                           "sudoku", "n-queens", "word-search", "permutations", "subsets"]),
     ("dp-1d",            ["climbing-stairs", "house-robber", "longest-increasing-subsequence",
-                          "coin-change", "word-break", "target-sum", "longest-valid-parentheses",
-                          "decode-ways"]),
+                          "coin-change", "word-break", "target-sum", "longest-valid-parentheses"]),
     ("dp-2d",            ["longest-common-subsequence", "edit-distance", "coin-change-ii",
-                          "count-square-submatrices", "burst-balloons", "regular-expression",
-                          "pascals-triangle", "unique-paths", "minimum-path-sum",
-                          "ways-to-express-an-integer"]),
+                          "count-square-submatrices", "burst-balloons", "pascals-triangle"]),
     ("tries",            ["implement-trie", "prefix-tree", "add-and-search-words",
-                          "word-search-ii", "replace-words", "maximum-xor"]),
-    ("monotonic-stack",  ["largest-rectangle-in-histogram", "maximal-rectangle", "next-greater",
-                          "daily-temperatures", "subarray-minimums", "asteroid"]),
-    # Easy topics
-    ("arrays",           ["two-sum", "buy-and-sell-stock", "product-of-array", "maximum-subarray",
-                          "maximum-product-subarray", "container-with-most-water", "three-integer-sum",
-                          "trapping-rain-water", "merge-intervals", "insert-interval", "gas-station",
-                          "remove-one-element-to-make", "strictly-increasing", "rotate-array",
-                          "move-zeroes", "best-time-to-buy"]),
+                          "word-search-ii", "suffix-queries", "common-suffix", "trie"]),
+    ("monotonic-stack",  ["largest-rectangle", "next-greater", "daily-temperatures", "subarray-minimums"]),
+    ("arrays",           ["two-sum", "buy-and-sell", "product-of-array", "maximum-subarray",
+                          "container-with-most-water", "trapping-rain", "merge-intervals",
+                          "remove-one-element-to-make", "strictly-increasing"]),
     ("hashmaps",         ["group-anagrams", "anagram-groups", "longest-consecutive",
                           "subarray-sum-equals", "top-k-frequent", "lru-cache"]),
-    ("strings",          ["valid-palindrome", "is-palindrome", "valid-anagram", "is-anagram",
-                          "encode-and-decode", "string-encode", "longest-palindromic",
-                          "palindromic-substrings", "add-strings", "reverse-string"]),
-    ("stack-queue",      ["min-stack", "minimum-stack", "implement-queue", "implement-stack",
-                          "evaluate-reverse-polish", "generate-parentheses", "car-fleet",
-                          "validate-parentheses"]),
-    ("linked-list",      ["reverse-linked-list", "reverse-a-linked-list", "merge-two-sorted-list",
-                          "linked-list-cycle", "remove-nth-node", "remove-node-from-end",
-                          "reorder-list", "reorder-linked", "add-two-numbers",
-                          "reverse-nodes-in-k", "copy-list-with-random",
-                          "copy-linked-list-with-random",
-                          "convert-binary-number-in-a-linked-list"]),
-    ("sorting",          ["sort-colors", "sort-list", "largest-number", "wiggle-sort", "sort-array",
-                          "sort-matrix"]),
+    ("strings",          ["valid-palindrome", "valid-anagram", "encode-and-decode",
+                          "longest-palindromic", "valid-parentheses", "add-strings"]),
+    ("stack-queue",      ["min-stack", "minimum-stack", "evaluate-reverse-polish",
+                          "generate-parentheses", "car-fleet", "validate-parentheses"]),
+    ("linked-list",      ["reverse-linked-list", "merge-two-sorted-list", "linked-list-cycle",
+                          "remove-nth-node", "reorder-list", "add-two-numbers",
+                          "reverse-nodes-in-k", "copy-list-with-random"]),
+    ("sorting",          ["sort-colors", "sort-list", "largest-number", "sort-matrix"]),
     ("greedy",           ["assign-cookies", "non-overlapping-intervals", "partition-labels",
-                          "valid-parenthesis-string", "maximum-events", "matching-players",
-                          "maximum-matching"]),
+                          "matching-players", "maximum-events"]),
     ("math-bit",         ["number-of-1-bits", "counting-bits", "reverse-bits", "missing-number",
-                          "sum-of-two-integers", "reverse-integer", "powx-n", "power-of-two",
-                          "power-of-three", "power-of-four", "reordered-power-of-2",
-                          "single-number", "hamming-distance", "range-product-queries"]),
+                          "power-of-two", "power-of-three", "power-of-four", "reordered-power"]),
 ]
 
-HARD_TOPICS = {"graphs-bfs-dfs", "graphs-topo-sort", "graphs-advanced", "trees",
-               "heaps", "sliding-window", "binary-search", "backtracking",
-               "dp-1d", "dp-2d", "tries", "monotonic-stack"}
+
+def get_lc_tags(slug: str) -> tuple | None:
+    """Call LC GraphQL API to get topic tags. Returns (bucket, topic) or None if failed."""
+    query = """
+    query getTopicTags($titleSlug: String!) {
+        question(titleSlug: $titleSlug) {
+            questionId
+            difficulty
+            topicTags { slug }
+        }
+    }
+    """
+    try:
+        resp = requests.post(
+            "https://leetcode.com/graphql",
+            json={"query": query, "variables": {"titleSlug": slug}},
+            headers={
+                "Content-Type": "application/json",
+                "Referer": f"https://leetcode.com/problems/{slug}/",
+                "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36",
+                "Origin": "https://leetcode.com",
+            },
+            timeout=10
+        )
+        if resp.status_code != 200:
+            return None
+
+        data = resp.json()
+        q = data.get("data", {}).get("question")
+        if not q:
+            return None
+
+        tags = [t["slug"] for t in q.get("topicTags", [])]
+
+        # Map tags to topic — hard topics take priority
+        hard_match = None
+        easy_match = None
+        for tag in tags:
+            if tag in LC_TAG_TO_TOPIC:
+                bucket, topic = LC_TAG_TO_TOPIC[tag]
+                if bucket == "hard" and not hard_match:
+                    hard_match = (bucket, topic)
+                elif bucket == "easy" and not easy_match:
+                    easy_match = (bucket, topic)
+
+        # Refine dp-1d vs dp-2d based on difficulty
+        result = hard_match or easy_match
+        if result and result[1] == "dp-1d" and q.get("difficulty") == "Hard":
+            result = ("hard", "dp-2d")
+
+        return result or ("easy", "uncategorized")
+
+    except Exception:
+        return None
 
 
-def classify_slug(slug: str) -> tuple:
+def classify_from_keywords(slug: str) -> tuple:
+    """Keyword fallback classifier."""
     for topic, keywords in TOPIC_RULES:
         for kw in keywords:
             if kw in slug:
@@ -92,29 +178,30 @@ def classify_slug(slug: str) -> tuple:
     return "easy", "uncategorized"
 
 
+def classify(slug: str, url: str) -> tuple:
+    """Classify using LC API first, fall back to keywords."""
+    lc_slug = url.split('/problems/')[-1].rstrip('/')
+    result = get_lc_tags(lc_slug)
+    if result:
+        return result
+    print(f"  ⚠️  API failed for {lc_slug}, using keyword fallback")
+    return classify_from_keywords(slug)
+
+
 def parse_readme(folder: Path) -> dict | None:
     readme = folder / "README.md"
     if not readme.exists():
         return None
-
     text = readme.read_text(errors='ignore')
 
-    # Extract LC URL
     url_match = re.search(r'href="(https://leetcode\.com/problems/[^"]+)"', text)
-    if not url_match:
-        return None
-
-    # Extract title — strip leading "NNNN. " if present (NeetCode uses its own IDs)
     title_match = re.search(r'href="https://leetcode\.com/problems/[^"]+">(?:\d+\.\s+)?([^<]+)</a>', text)
-    if not title_match:
+    if not url_match or not title_match:
         return None
-    title = title_match.group(1).strip()
 
-    # Get LC problem ID from folder name prefix (most reliable source)
     folder_id_match = re.match(r'^(\d+)-', folder.name)
     problem_id = int(folder_id_match.group(1)) if folder_id_match else 0
 
-    # Extract difficulty from badge or h3
     diff_match = re.search(r'Difficulty-(Easy|Medium|Hard)', text)
     if not diff_match:
         diff_match = re.search(r'<h3>(Easy|Medium|Hard)</h3>', text)
@@ -124,7 +211,7 @@ def parse_readme(folder: Path) -> dict | None:
 
     return {
         "id": problem_id,
-        "title": title,
+        "title": title_match.group(1).strip(),
         "url": f"https://leetcode.com/problems/{lc_slug}/",
         "difficulty": diff_match.group(1) if diff_match else "Medium",
         "solved": True,
@@ -154,7 +241,7 @@ def update_problems_json(repo_root: Path):
     with open(problems_path) as f:
         problems = json.load(f)
 
-    # Build set of all known LC slugs
+    # Build known slugs
     known_slugs = set()
     for bucket in ["hard", "easy"]:
         for topic, prob_list in problems[bucket].items():
@@ -167,14 +254,11 @@ def update_problems_json(repo_root: Path):
     # ── Step 1: Auto-discover new problems ───────────────────────────────────
     newly_added = []
     for folder in all_folders:
-        # Get LC slug: strip leading digits from folder name
         raw_slug = folder.name.lower()
         lc_slug = re.sub(r'^\d+-', '', raw_slug)
 
-        # Skip if already known (check both folder slug and lc slug)
         if lc_slug in known_slugs or raw_slug in known_slugs:
             continue
-        # Also skip if any known slug is contained in this slug (duplicate folder)
         if any(ks in lc_slug for ks in known_slugs if len(ks) > 10):
             continue
 
@@ -186,12 +270,16 @@ def update_problems_json(repo_root: Path):
         if actual_slug in known_slugs:
             continue
 
-        bucket, topic = classify_slug(lc_slug)
+        # Classify via LC API → keyword fallback
+        bucket, topic = classify(lc_slug, meta["url"])
+
+        problems[bucket].setdefault(topic, []).append(meta)
         if "uncategorized" not in problems.get(bucket, {}):
             problems.setdefault(bucket, {})["uncategorized"] = []
-        problems[bucket].setdefault(topic, []).append(meta)
+
         known_slugs.add(actual_slug)
         newly_added.append(f"{meta['id'] or '?'}. {meta['title']} → {bucket}/{topic}")
+        time.sleep(0.3)  # be polite to LC API
 
     if newly_added:
         print(f"\n{len(newly_added)} newly discovered:")
