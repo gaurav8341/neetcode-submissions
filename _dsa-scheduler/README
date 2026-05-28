@@ -1,0 +1,117 @@
+# DSA Scheduler
+
+Automated weekly DSA practice scheduler. Pairs a hard topic with an easy topic every week across a 52-week rotation, creates Google Calendar events, and tracks progress.
+
+---
+
+## How it works
+
+Every Saturday at 11 PM you get a planning reminder. Open Claude and say:
+
+> "Schedule my DSA for next week — I'm on week X"
+
+Claude reads the files in this folder, picks problems based on your solved history and last reviewed dates, creates Google Calendar events for the full week, and writes the schedule to `schedules/week-XX.md`.
+
+---
+
+## Weekly structure
+
+| Day | Type | Problems |
+|-----|------|----------|
+| Mon | Review (odd) | 1 hard (solved) + 1 easy (solved) |
+| Tue | New (even) | 1 hard (unsolved) + 1 easy (unsolved) |
+| Wed | Review (odd) | 1 hard (solved) + 1 easy (solved) |
+| Thu | New (even) | 1 hard (unsolved) + 1 easy (unsolved) |
+| Fri | Review (odd) | 1 hard (solved) + 1 easy (solved) |
+| Sat | Speed Day | 2 review + 1 new, all timed |
+| Sun | Rest | No events |
+
+**Review rule:** write from scratch, no peeking for 5 min. If you blank → look, close, rewrite.
+
+**Speed day rule:** write cold, timed. Miss targets badly → repeat the pattern next week.
+
+---
+
+## 52-Week Topic Rotation
+
+| Weeks | Hard Topic | Easy Topic |
+|-------|-----------|------------|
+| 1-2 | Graphs BFS/DFS | Arrays |
+| 3-4 | Graphs Topo Sort | HashMaps |
+| 5-6 | Trees | Strings |
+| 7-8 | Heaps | Stack/Queue |
+| 9-10 | Sliding Window | Linked List |
+| 11-12 | Binary Search | Sorting |
+| 13-14 | Backtracking | Greedy |
+| 15-16 | DP 1D | Math/Bit |
+| 17-18 | DP 2D | Arrays |
+| 19-20 | Tries | Strings |
+| 21-22 | Graphs Advanced | HashMaps |
+| 23-24 | Monotonic Stack | Stack/Queue |
+| 25-52 | Cycle repeats — same patterns, harder problems |
+
+---
+
+## Files
+
+```
+dsa-scheduler/
+├── README.md           ← you are here
+├── SKILL.md            ← Claude skill instructions
+├── problems.json       ← full problem bank with solved status
+├── year_schedule.json  ← 52-week topic pairings
+├── progress.json       ← current week + last reviewed dates
+└── schedules/
+    ├── week-01.md
+    ├── week-02.md
+    └── ...             ← auto-generated each week
+```
+
+---
+
+## Current coverage
+
+| Topic | Solved |
+|-------|--------|
+| Backtracking | 9/9 ✅ |
+| Trees | 10/11 |
+| Graphs BFS/DFS | 8/11 |
+| Heaps | 7/9 |
+| Linked List | 7/7 ✅ |
+| Sliding Window | 5/6 |
+| Binary Search | 5/7 |
+| Graphs Topo Sort | 2/6 |
+| Graphs Advanced | 3/6 |
+| Tries | 2/5 |
+| Monotonic Stack | 2/5 |
+| DP 1D | 2/7 |
+| DP 2D | 0/6 ❌ |
+| Arrays (easy) | 1/11 |
+| HashMaps (easy) | 3/7 |
+| Strings (easy) | 1/7 |
+| Stack/Queue (easy) | 3/6 |
+| Sorting (easy) | 0/5 ❌ |
+| Greedy (easy) | 0/5 ❌ |
+| Math/Bit (easy) | 0/7 ❌ |
+
+---
+
+## Speed day targets
+
+| Problem type | Target |
+|-------------|--------|
+| Easy graph/tree | < 4 min |
+| Medium graph/tree | < 8 min |
+| Hard graph | < 12 min |
+| Easy array/string | < 3 min |
+| Medium array/string | < 6 min |
+
+---
+
+## Calendar events
+
+Each day has two slots — pick whichever works:
+- **Morning**: 8:00–9:00 AM IST
+- **Evening**: 10:00–11:00 PM IST
+
+Planning reminder fires every **Saturday at 11 PM** — that's your cue to come update next week.
