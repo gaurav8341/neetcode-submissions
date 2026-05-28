@@ -3,11 +3,12 @@ name: Update DSA Problem Bank
 on:
   push:
     branches: [main]
-    paths:
-      - "Data Structures & Algorithms/**"
-      - "542-01-matrix/**"
+    # triggers on any new problem folder added at root
+    paths-ignore:
+      - "_dsa-scheduler/**"
+      - ".github/**"
+      - "README.md"
 
-  # Also allow manual trigger
   workflow_dispatch:
 
 jobs:
@@ -26,18 +27,18 @@ jobs:
           python-version: "3.11"
 
       - name: Run problem bank updater
-        run: python dsa-scheduler/update_problems.py
+        run: python _dsa-scheduler/update_problems.py
 
       - name: Check for changes
         id: changes
         run: |
-          git diff --quiet dsa-scheduler/problems.json || echo "changed=true" >> $GITHUB_OUTPUT
+          git diff --quiet _dsa-scheduler/problems.json || echo "changed=true" >> $GITHUB_OUTPUT
 
       - name: Commit updated problems.json
         if: steps.changes.outputs.changed == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add dsa-scheduler/problems.json
+          git add _dsa-scheduler/problems.json
           git commit -m "🤖 Auto-update: sync solved status in problems.json"
           git push
