@@ -219,3 +219,10 @@ Data Structures & Algorithms/
 ---
 
 *Consolidated from `DSA-Leetcode` (LeetHub) and `neetcode-submissions` (NeetCode.io).*
+<!---LeetCode Topics Start-->
+# LeetCode Topics
+## Array
+|  |
+| ------- |
+| [1909-remove-one-element-to-make-the-array-strictly-increasing](https://github.com/gaurav8341/neetcode-submissions/tree/master/1909-remove-one-element-to-make-the-array-strictly-increasing) |
+<!---LeetCode Topics End-->
