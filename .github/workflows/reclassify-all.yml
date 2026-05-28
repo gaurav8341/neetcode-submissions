@@ -1,7 +1,7 @@
 name: Reclassify All Problems
 
 on:
-  workflow_dispatch:  # manual trigger only
+  workflow_dispatch:
 
 jobs:
   reclassify:
@@ -11,112 +11,18 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-
       - run: pip install requests -q
 
-      - name: Reclassify all problems via LC API
-        run: |
-          python3 - << 'PYEOF'
-          import json, re, time, requests
-          from pathlib import Path
-
-          LC_TAG_TO_TOPIC = {
-              "depth-first-search":    ("hard", "graphs-bfs-dfs"),
-              "breadth-first-search":  ("hard", "graphs-bfs-dfs"),
-              "matrix":                ("hard", "graphs-bfs-dfs"),
-              "topological-sort":      ("hard", "graphs-topo-sort"),
-              "union-find":            ("hard", "graphs-advanced"),
-              "shortest-path":         ("hard", "graphs-advanced"),
-              "graph":                 ("hard", "graphs-bfs-dfs"),
-              "tree":                  ("hard", "trees"),
-              "binary-tree":           ("hard", "trees"),
-              "binary-search-tree":    ("hard", "trees"),
-              "heap-priority-queue":   ("hard", "heaps"),
-              "sliding-window":        ("hard", "sliding-window"),
-              "binary-search":         ("hard", "binary-search"),
-              "backtracking":          ("hard", "backtracking"),
-              "dynamic-programming":   ("hard", "dp-1d"),
-              "trie":                  ("hard", "tries"),
-              "monotonic-stack":       ("hard", "monotonic-stack"),
-              "divide-and-conquer":    ("hard", "binary-search"),
-              "recursion":             ("hard", "backtracking"),
-              "stack":                 ("easy", "stack-queue"),
-              "queue":                 ("easy", "stack-queue"),
-              "monotonic-queue":       ("easy", "stack-queue"),
-              "array":                 ("easy", "arrays"),
-              "two-pointers":          ("easy", "arrays"),
-              "prefix-sum":            ("easy", "arrays"),
-              "hash-table":            ("easy", "hashmaps"),
-              "string":                ("easy", "strings"),
-              "linked-list":           ("easy", "linked-list"),
-              "sorting":               ("easy", "sorting"),
-              "greedy":                ("easy", "greedy"),
-              "bit-manipulation":      ("easy", "math-bit"),
-              "math":                  ("easy", "math-bit"),
-          }
-
-          def get_classification(slug):
-              try:
-                  resp = requests.post("https://leetcode.com/graphql",
-                      json={"query": "query($t:String!){question(titleSlug:$t){difficulty topicTags{slug}}}",
-                            "variables": {"t": slug}},
-                      headers={"Content-Type":"application/json",
-                               "Referer":f"https://leetcode.com/problems/{slug}/",
-                               "User-Agent":"Mozilla/5.0","Origin":"https://leetcode.com"},
-                      timeout=10)
-                  if resp.status_code != 200: return None
-                  q = resp.json().get("data",{}).get("question")
-                  if not q: return None
-                  tags = [t["slug"] for t in q.get("topicTags",[])]
-                  hard = easy = None
-                  for tag in tags:
-                      if tag in LC_TAG_TO_TOPIC:
-                          b,t = LC_TAG_TO_TOPIC[tag]
-                          if b=="hard" and not hard: hard=(b,t)
-                          elif b=="easy" and not easy: easy=(b,t)
-                  r = hard or easy
-                  if r and r[1]=="dp-1d" and q.get("difficulty")=="Hard": r=("hard","dp-2d")
-                  return r or ("easy","uncategorized")
-              except: return None
-
-          path = Path("_dsa-scheduler/problems.json")
-          with open(path) as f: data = json.load(f)
-
-          all_probs = [(b,t,p) for b in ["hard","easy"] for t,ps in data[b].items() for p in ps]
-          print(f"Reclassifying {len(all_probs)} problems...")
-
-          new_data = {
-              "hard": {t:[] for t in ["graphs-bfs-dfs","graphs-topo-sort","graphs-advanced","trees",
-                                      "heaps","sliding-window","binary-search","backtracking",
-                                      "dp-1d","dp-2d","tries","monotonic-stack"]},
-              "easy": {t:[] for t in ["arrays","hashmaps","strings","stack-queue",
-                                      "linked-list","sorting","greedy","math-bit","uncategorized"]}
-          }
-
-          moved = 0
-          for old_b, old_t, prob in all_probs:
-              m = re.search(r'/problems/([^/]+)', prob.get("url",""))
-              slug = m.group(1).rstrip('/') if m else ""
-              result = get_classification(slug) if slug else None
-              time.sleep(0.3)
-              nb, nt = result if result else (old_b, old_t)
-              new_data[nb].setdefault(nt,[]).append(prob)
-              if nb != old_b or nt != old_t:
-                  moved += 1
-                  print(f"  🔄 {prob.get('title')} → {nb}/{nt}")
-
-          with open(path,"w") as f: json.dump(new_data, f, indent=2)
-          print(f"\nDone. {moved} reclassified.")
-          PYEOF
+      - name: Reclassify all problems via LC API (priority-based)
+        run: python _dsa-scheduler/reclassify_all.py
 
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add _dsa-scheduler/problems.json
-          git diff --cached --quiet || git commit -m "🤖 Reclassify all problems via LC API"
+          git diff --cached --quiet || git commit -m "🤖 Reclassify all problems (priority-based LC API)"
           git push
