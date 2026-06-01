@@ -241,4 +241,20 @@ Data Structures & Algorithms/
 | ------- |
 | [3120-count-the-number-of-special-characters-i](https://github.com/gaurav8341/neetcode-submissions/tree/master/3120-count-the-number-of-special-characters-i) |
 | [3121-count-the-number-of-special-characters-ii](https://github.com/gaurav8341/neetcode-submissions/tree/master/3121-count-the-number-of-special-characters-ii) |
+## Depth-First Search
+|  |
+| ------- |
+| [0207-course-schedule](https://github.com/gaurav8341/neetcode-submissions/tree/master/0207-course-schedule) |
+## Breadth-First Search
+|  |
+| ------- |
+| [0207-course-schedule](https://github.com/gaurav8341/neetcode-submissions/tree/master/0207-course-schedule) |
+## Graph Theory
+|  |
+| ------- |
+| [0207-course-schedule](https://github.com/gaurav8341/neetcode-submissions/tree/master/0207-course-schedule) |
+## Topological Sort
+|  |
+| ------- |
+| [0207-course-schedule](https://github.com/gaurav8341/neetcode-submissions/tree/master/0207-course-schedule) |
 <!---LeetCode Topics End-->
