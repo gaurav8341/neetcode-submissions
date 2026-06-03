@@ -229,6 +229,7 @@ Data Structures & Algorithms/
 ## String
 |  |
 | ------- |
+| [0383-ransom-note](https://github.com/gaurav8341/neetcode-submissions/tree/master/0383-ransom-note) |
 | [3093-longest-common-suffix-queries](https://github.com/gaurav8341/neetcode-submissions/tree/master/3093-longest-common-suffix-queries) |
 | [3120-count-the-number-of-special-characters-i](https://github.com/gaurav8341/neetcode-submissions/tree/master/3120-count-the-number-of-special-characters-i) |
 | [3121-count-the-number-of-special-characters-ii](https://github.com/gaurav8341/neetcode-submissions/tree/master/3121-count-the-number-of-special-characters-ii) |
@@ -239,6 +240,7 @@ Data Structures & Algorithms/
 ## Hash Table
 |  |
 | ------- |
+| [0383-ransom-note](https://github.com/gaurav8341/neetcode-submissions/tree/master/0383-ransom-note) |
 | [3120-count-the-number-of-special-characters-i](https://github.com/gaurav8341/neetcode-submissions/tree/master/3120-count-the-number-of-special-characters-i) |
 | [3121-count-the-number-of-special-characters-ii](https://github.com/gaurav8341/neetcode-submissions/tree/master/3121-count-the-number-of-special-characters-ii) |
 ## Depth-First Search
@@ -265,4 +267,8 @@ Data Structures & Algorithms/
 | [0207-course-schedule](https://github.com/gaurav8341/neetcode-submissions/tree/master/0207-course-schedule) |
 | [0210-course-schedule-ii](https://github.com/gaurav8341/neetcode-submissions/tree/master/0210-course-schedule-ii) |
 | [0310-minimum-height-trees](https://github.com/gaurav8341/neetcode-submissions/tree/master/0310-minimum-height-trees) |
+## Counting
+|  |
+| ------- |
+| [0383-ransom-note](https://github.com/gaurav8341/neetcode-submissions/tree/master/0383-ransom-note) |
 <!---LeetCode Topics End-->
