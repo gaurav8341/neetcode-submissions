@@ -229,6 +229,7 @@ Data Structures & Algorithms/
 ## String
 |  |
 | ------- |
+| [0242-valid-anagram](https://github.com/gaurav8341/neetcode-submissions/tree/master/0242-valid-anagram) |
 | [0383-ransom-note](https://github.com/gaurav8341/neetcode-submissions/tree/master/0383-ransom-note) |
 | [3093-longest-common-suffix-queries](https://github.com/gaurav8341/neetcode-submissions/tree/master/3093-longest-common-suffix-queries) |
 | [3120-count-the-number-of-special-characters-i](https://github.com/gaurav8341/neetcode-submissions/tree/master/3120-count-the-number-of-special-characters-i) |
@@ -240,6 +241,7 @@ Data Structures & Algorithms/
 ## Hash Table
 |  |
 | ------- |
+| [0242-valid-anagram](https://github.com/gaurav8341/neetcode-submissions/tree/master/0242-valid-anagram) |
 | [0383-ransom-note](https://github.com/gaurav8341/neetcode-submissions/tree/master/0383-ransom-note) |
 | [3120-count-the-number-of-special-characters-i](https://github.com/gaurav8341/neetcode-submissions/tree/master/3120-count-the-number-of-special-characters-i) |
 | [3121-count-the-number-of-special-characters-ii](https://github.com/gaurav8341/neetcode-submissions/tree/master/3121-count-the-number-of-special-characters-ii) |
@@ -271,4 +273,8 @@ Data Structures & Algorithms/
 |  |
 | ------- |
 | [0383-ransom-note](https://github.com/gaurav8341/neetcode-submissions/tree/master/0383-ransom-note) |
+## Sorting
+|  |
+| ------- |
+| [0242-valid-anagram](https://github.com/gaurav8341/neetcode-submissions/tree/master/0242-valid-anagram) |
 <!---LeetCode Topics End-->
