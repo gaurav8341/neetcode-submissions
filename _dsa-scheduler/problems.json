@@ -1401,7 +1401,7 @@
         "id": 242,
         "title": "Valid Anagram",
         "url": "https://leetcode.com/problems/valid-anagram/",
-        "solved": false,
+        "solved": true,
         "last_reviewed": null
       },
       {
