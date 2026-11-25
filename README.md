@@ -224,6 +224,7 @@ Data Structures & Algorithms/
 ## Array
 |  |
 | ------- |
+| [1584-min-cost-to-connect-all-points](https://github.com/gaurav8341/neetcode-submissions/tree/master/1584-min-cost-to-connect-all-points) |
 | [1909-remove-one-element-to-make-the-array-strictly-increasing](https://github.com/gaurav8341/neetcode-submissions/tree/master/1909-remove-one-element-to-make-the-array-strictly-increasing) |
 | [3093-longest-common-suffix-queries](https://github.com/gaurav8341/neetcode-submissions/tree/master/3093-longest-common-suffix-queries) |
 ## String
@@ -263,6 +264,7 @@ Data Structures & Algorithms/
 | [0207-course-schedule](https://github.com/gaurav8341/neetcode-submissions/tree/master/0207-course-schedule) |
 | [0210-course-schedule-ii](https://github.com/gaurav8341/neetcode-submissions/tree/master/0210-course-schedule-ii) |
 | [0310-minimum-height-trees](https://github.com/gaurav8341/neetcode-submissions/tree/master/0310-minimum-height-trees) |
+| [1584-min-cost-to-connect-all-points](https://github.com/gaurav8341/neetcode-submissions/tree/master/1584-min-cost-to-connect-all-points) |
 ## Topological Sort
 |  |
 | ------- |
@@ -277,4 +279,24 @@ Data Structures & Algorithms/
 |  |
 | ------- |
 | [0242-valid-anagram](https://github.com/gaurav8341/neetcode-submissions/tree/master/0242-valid-anagram) |
+## Union-Find
+|  |
+| ------- |
+| [1584-min-cost-to-connect-all-points](https://github.com/gaurav8341/neetcode-submissions/tree/master/1584-min-cost-to-connect-all-points) |
+## Minimum Spanning Tree
+|  |
+| ------- |
+| [1584-min-cost-to-connect-all-points](https://github.com/gaurav8341/neetcode-submissions/tree/master/1584-min-cost-to-connect-all-points) |
+## Prim's Algorithm
+|  |
+| ------- |
+| [1584-min-cost-to-connect-all-points](https://github.com/gaurav8341/neetcode-submissions/tree/master/1584-min-cost-to-connect-all-points) |
+## Kruskal's Algorithm
+|  |
+| ------- |
+| [1584-min-cost-to-connect-all-points](https://github.com/gaurav8341/neetcode-submissions/tree/master/1584-min-cost-to-connect-all-points) |
+## Borůvka's Algorithm
+|  |
+| ------- |
+| [1584-min-cost-to-connect-all-points](https://github.com/gaurav8341/neetcode-submissions/tree/master/1584-min-cost-to-connect-all-points) |
 <!---LeetCode Topics End-->
