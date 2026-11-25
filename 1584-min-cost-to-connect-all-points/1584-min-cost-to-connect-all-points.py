@@ -5,6 +5,8 @@ class Solution:
         visited = [False] * n
         pq = [(0, 0)] # cost and index
 
+        cache = {0: 0}
+
         while pq:
             cost, idx = heapq.heappop(pq)
 
@@ -18,7 +20,9 @@ class Solution:
                 if not visited[v]:
                     dist = abs(points[idx][0] - points[v][0]) + \
                             abs(points[idx][1] - points[v][1])
-                    heapq.heappush(pq, (dist, v))
+                    if dist < cache.get(v, float("inf")):
+                        cache[v] = dist
+                        heapq.heappush(pq, (dist, v))
             
 
         return min_cost
